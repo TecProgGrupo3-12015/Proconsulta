@@ -1,3 +1,9 @@
+# File: unity_procons_controller.rb
+# Purpose of class: Contains action methods for unity procons view
+# This software follows GPL license
+# Proconsulta Group
+# FGA-UnB Faculdade de Engenharias do Gama - Universidade de Brasília
+
 # encoding: UTF-8
 class UnityProconsController < ApplicationController
 	# Show all procon units

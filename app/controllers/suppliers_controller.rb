@@ -1,3 +1,10 @@
+# File: suppliers_controller.rb
+# Purpose of class: Contains action methods for supliers view
+# This software follows GPL license
+# Proconsulta Group
+# FGA-UnB Faculdade de Engenharias do Gama - Universidade de Brasília
+
+
 class SuppliersController < ApplicationController
 	# Show 	all sppliers
 	def index

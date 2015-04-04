@@ -1,3 +1,9 @@
+# File: unity_procon.rb
+# Purpose of class: Responsible for processing, validating, associate, other tasks in the treatment of unity procon's data.
+# This software follows GPL license
+# Proconsulta Group
+# FGA-UnB Faculdade de Engenharias do Gama - Universidade de Brasília
+
 class UnityProcon < ActiveRecord::Base
 	geocoded_by :address_unity_procon
 	after_validation :geocode
