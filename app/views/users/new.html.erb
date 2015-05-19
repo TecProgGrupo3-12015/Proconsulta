@@ -2,7 +2,6 @@
 	<% provide(:title, "Cadastro de novo usuário") %>
 	<title><%= yield(:title) %></title>
 	<h1>Cadastro de Usuário</h1>
-
 	<%= form_for(@user) do |f| %>
 		<%= render 'signup_fields', f: f %>
 		<%= f.submit "Registrar conta", class: "btn btn-large btn-primary" %>
