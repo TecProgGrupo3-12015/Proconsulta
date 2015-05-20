@@ -1,45 +1,46 @@
 <!-- _searcher for customer_service -->
 <% if yield(:title) == "Atendimentos" %>
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span3">
-			<h3>BUSCAR</h3>
-			<span style="color:#FFA500">
-			<%= search_form_for @search do |f| %>
-				<div class="field">
-					<%= f.label :id , "ID:" %></br>
-					<%= f.text_field :id %>
-				</div>
-				<div class="field">
-					<%= f.label :year_customer_service_cont, "Ano:" %></br>
-					<%= f.text_field :year_customer_service_cont %>
-				</div>
-				<div class="field">
-					<%= f.label :description_customer_service_cont, "Descrição:" %></br>
-					<%= f.text_field :description_customer_service_cont %>
-				</div>
-				<div class="field">
-					<%= f.label :region_customer_service_cont, "Região:" %></br>
-					<%= f.text_field :region_customer_service_cont %>
-				</div>
-				<div class="field">
-					<%= f.label :uf_customer_service_cont, "UF:" %></br>
-					<%= f.text_field :uf_customer_service_cont %>
-				</div>
-				<div class="actions"></br>
-					<%= f.submit "Pesquisar", class: "btn btn-large btn-primary" %>
-				</div>
-				<% end %>
-			</span>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span3">
+				<h3>BUSCAR</h3>
+				<span style="color:#FFA500">
+					<%= search_form_for @search do |f| %>
+						<div class="field">
+							<%= f.label :id , "ID:" %></br>
+							<%= f.text_field :id %>
+						</div>
+						<div class="field">
+							<%= f.label :year_customer_service_cont, "Ano:" %></br>
+							<%= f.text_field :year_customer_service_cont %>
+						</div>
+						<div class="field">
+							<%= f.label :description_customer_service_cont, "Descrição:" %></br>
+							<%= f.text_field :description_customer_service_cont %>
+						</div>
+						<div class="field">
+							<%= f.label :region_customer_service_cont, "Região:" %></br>
+							<%= f.text_field :region_customer_service_cont %>
+						</div>
+						<div class="field">
+							<%= f.label :uf_customer_service_cont, "UF:" %></br>
+							<%= f.text_field :uf_customer_service_cont %>
+						</div>
+						<div class="actions"></br>
+							<%= f.submit "Pesquisar", class: "btn btn-large btn-primary" %>
+						</div>
+						<% end %>
+				</span>
+			</div>
 		</div>
-	<% end %>
+	</div>	
+<% end %>
 <!-- end _searcher for customer_service -->
 
 <!-- _searcher for unity_procon -->
 <% if yield(:title) == "Procons" %>
 	<div>
-
-		<div class="container-fluid">
+	<div class="container-fluid">
 	<div class="row-fluid">
 	<div class="span2">
 

@@ -7,7 +7,7 @@
 				<li><%= link_to "Avaliar Procon", avaliar_path %></li>
 				<li id="fat-menu" class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-				Dados <b class="caret"></b>
+					Dados <b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu">
 					<li><%= link_to "Atendimentos", customer_services_path %></li>
@@ -23,20 +23,20 @@
 				<% if signed_in? %>
 					<li id="fat-menu" class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<%= current_user.name_user %> <b class="caret"></b>
+							<%= current_user.name_user %> <b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu">
 							<li><%= link_to "Conta", current_user %></li>
 							<li class="divider"></li>
 							<li>
-							<%= link_to "Deslogar", signout_path, method: "delete" %>
+								<%= link_to "Deslogar", signout_path, method: "delete" %>
 							</li>
 						</ul>
 					</li>
 				<% else %>
 					<li id="fat-menu" class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						Acesso <b class="caret"></b>
+							Acesso <b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu">
 							<li><%= link_to "Registrar", signup_path %></li>

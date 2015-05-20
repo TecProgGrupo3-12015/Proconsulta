@@ -10,7 +10,6 @@
 			<%= javascript_include_tag "application" %>
 			<%= javascript_include_tag "//www.google.com/jsapi" %>
 			<%= javascript_include_tag "path/to/highcharts.js", "chartkick" %>
-
 			<%= csrf_meta_tags %>
 			<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,12 +20,13 @@
 
 		<div class="container" id="yield-container">
 			<% flash.each do |key, value| %>
-				<div class="alert alert-<%= key %>"><%= value %></div>
+				<div class="alert alert-<%= key %>">
+					<%= value %>
+				</div>
 			<% end %>
 			<%= yield %>
 		</div>
 	</body>
 
 	<%= render 'layouts/footer' %>
-
 </html>
