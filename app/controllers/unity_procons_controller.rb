@@ -63,7 +63,6 @@ class UnityProconsController < ApplicationController
 	# Order the procon unitys
 	def ranking
 		@unity_procons = UnityProcon.order(:position_unity_procon)
-		CUSTOM.LOGGER.info("Ordered unity_procons")
 	end
 
 	def edit
@@ -114,7 +113,7 @@ class UnityProconsController < ApplicationController
 			@unity_procon.average_pontuation = Rating.where("unity_procon_id =?", @unity_procon.id).average(:value_rating)
 			@unity_procon.save
 			flash[:notice] = "Avaliação concluida"
-			CUSTOM.LOGGER.info("Updated unity procon #{@unity_procon.to_yaml}"")
+			CUSTOM.LOGGER.info("Updated unity procon #{@unity_procon.to_yaml}")
 		else
 			flash[:notice] = "ERRO!"
 			CUSTOM.LOGGER.error("Failure to update unity procon #{@unity_procon.to_yaml}")
