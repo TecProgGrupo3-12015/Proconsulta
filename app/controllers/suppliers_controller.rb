@@ -9,12 +9,14 @@ class SuppliersController < ApplicationController
 		@search = Supplier.search(params[:q])
 		@suppliers_search = @search.result
 		@suppliers = @suppliers_search.paginate(page: params[:page])
+		CUSTOM_LOGGER.info("Showed supliers")
 	end
 
 	# Show supplier associated with one especific id
 	def show
 		@supplier = Supplier.find(params[:id])
     @hash = hash_format_graph
+    CUSTOM_LOGGER.info("Showed the supplier graph")
 	end
 
 	# Format the graph of suppliers
@@ -30,6 +32,7 @@ class SuppliersController < ApplicationController
       	quantity_final = (quantity_total - quantity)
       	another_hash = {"quantity_final" => quantity_final }
       	hash = hash.merge(another_hash)
+      	CUSTOM_LOGGER.info("Formatted the supplier graph")
       end
     end 
 	end
