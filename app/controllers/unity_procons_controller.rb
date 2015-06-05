@@ -32,7 +32,7 @@ class UnityProconsController < ApplicationController
 		hash = Hash.new
 		all_rating = Rating.where("unity_procon_id = ?", params[:id])
 		all_rating.each do |rating|
-		case rating.value_rating
+			case rating.value_rating
 			when 1
 				ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
 				hash["Péssimo"] = ratings.count
