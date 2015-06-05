@@ -18,7 +18,7 @@ class CustomerServicesController < ApplicationController
 		@customer_services = CustomerService.paginate(page: params[:page])
 		@hash_uf = return_hash
 		@hash_uf_filter = []
-		@hash_region = return_hash_region#
+		@hash_region = return_hash_region
 	end
 
 	# List Customer_Service related to one especific id.
@@ -29,17 +29,19 @@ class CustomerServicesController < ApplicationController
 	def return_hash
 		hash = []
 		all_uf = UfHelper.all
-		all_uf.each do | uf|
-			if uf.description_uf == nil
+		all_uf.each do |uf|
+			if is_uf_description_nil?(uf)
 				uf.description_uf = "vazio"
 			else
-				# Nothing to do
+				# Nothing to do.
 			end
 			hash[uf.description_uf] = uf.quantity_uf.to_i
 		end
 		hash
 	end
 
+		# REVIEW: This constants can be in module or symbol hash. Maybe stay
+		# better.
 		QUANTITY_ALL = 0
 		QUANTITY_DIRECT_COMPLAINT = 1
 		QUANTITY_PRELIMINARY_SERVICE = 2
@@ -55,12 +57,11 @@ class CustomerServicesController < ApplicationController
 		all_uf = UfHelper.all
 		type_service = params[:type].to_i
 		all_uf.each do |uf|
-			if uf.description_uf == nil
+			if is_uf_description_nil?(uf)
 				uf.description_uf = "vazio"
 			else
-				# Nothing to do
+				# Nothing to do.
 			end
-			# To apply this case on style sheet ruby
 			hash[uf.description_uf] = case type_service
 																when QUANTITY_ALL then uf.quantity_uf
 																when QUANTITY_DIRECT_COMPLAINT
@@ -87,10 +88,10 @@ class CustomerServicesController < ApplicationController
 		hash = []
 		all_region = Region.all
 		all_region.each do |region|
-			if region.description_region == nil
+			if is_region_description_nil?(region)
 				region.description_region = "vazio"
 			else
-				# Nothing to do
+				# Nothing to do.
 			end
 			hash[region.description_region] = region.quantity_region.to_i
 		end
@@ -123,11 +124,39 @@ class CustomerServicesController < ApplicationController
 		all_region = Region.all
 		type_service = params[:type].to_i
 		all_region.each do |region|
-			if region.description_region == nil
+			if is_region_description_nil?(region)
 				region.description_region = "vazio"
+			else
+				# Nothing to do.
 			end
 			compare_customer_service_by_type(hash, region, type_service)
 		end
 		render :json => hash.to_json
+	end
+
+	private
+
+	# This method verify if the region object passed by argument do not have 
+	# description. Return true if do not have, else, false.
+	def is_region_description_nil? (region)
+		not_exist_region_description = region.description_region == nil
+
+		if not_exist_region_description
+			true
+		else
+			false
+		end
+	end
+	
+	# This method verify if the uf object passed by argument do not have 
+	# description. Return true if do not have, else, false.
+	def is_uf_description_nil? (uf)
+		not_exist_uf_description = uf.description_uf == nil
+
+		if not_exist_uf_description
+			true
+		else
+			# Nothing to do
+		end
 	end
 end

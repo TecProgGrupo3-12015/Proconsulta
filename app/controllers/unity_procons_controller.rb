@@ -24,6 +24,7 @@ class UnityProconsController < ApplicationController
 	  	marker.lat unity_procon.latitude
 	 		marker.lng unity_procon.longitude
 		end
+		CUSTOM.LOGGER.info("Showed unity procon #{@unity_procon.to_yaml}")
 	end
 
 	# Return the rating from one especific procon unity 
@@ -35,20 +36,25 @@ class UnityProconsController < ApplicationController
 			when 1
 				ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
 				hash["Péssimo"] = ratings.count
+				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
 			when 2
 				ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }	
 				hash["Ruim"] = ratings.count
+				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
 			when 3
 				ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
 				hash["Regular"] = ratings.count
+				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
 			when 4
 				ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
 				hash["Bom"] = ratings.count
+				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
 			when 5
 				ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
 				hash["Ótimo"] = ratings.count
+				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
 			else
-				# Nothing to do
+				CUSTOM.LOGGER.info("Failure to rate a unity procon")
 			end	
 		end
 		hash
@@ -60,6 +66,7 @@ class UnityProconsController < ApplicationController
 	end
 
 	def edit
+		CUSTOM.LOGGER.info("Started to edit unity procon #{@unity_procon.to_yaml}")
 	end
 
 	# Search the procon unity by UF(Unidade da Federacao) and another param
@@ -72,6 +79,7 @@ class UnityProconsController < ApplicationController
 		# Data receives a search of unity procon
 		data = UnityProcon.where("uf_procon = ?", params[:search]).paginate(:page=>1)
 		render :json=>data.to_json
+		CUSTOM.LOGGER.info("Searched a unity procon #{data.to_yaml}")
 	end
 
 	# Search the procon unity and order by ranking 
@@ -85,8 +93,10 @@ class UnityProconsController < ApplicationController
 		# Sort in descending order unity procons' rating if a search parameter is # entered or not
 		if params[:search] == ""
 			data = UnityProcon.where("average_pontuation is not null").order('average_pontuation DESC').paginate(:page=>1)
+			CUSTOM.LOGGER.info("Searched a unity procon without params ordered #{data.to_yaml}")
 		else
 			data = UnityProcon.where("uf_procon = ? and average_pontuation is not null", params[:search]).order('average_pontuation DESC').paginate(:page=>1)
+			CUSTOM.LOGGER.info("Searched a unity procon ordered #{data.to_yaml}")
 		end
 		render :json=>data.to_json
 	end
@@ -103,8 +113,10 @@ class UnityProconsController < ApplicationController
 			@unity_procon.average_pontuation = Rating.where("unity_procon_id =?", @unity_procon.id).average(:value_rating)
 			@unity_procon.save
 			flash[:notice] = "Avaliação concluida"
+			CUSTOM.LOGGER.info("Updated unity procon #{@unity_procon.to_yaml}")
 		else
 			flash[:notice] = "ERRO!"
+			CUSTOM.LOGGER.error("Failure to update unity procon #{@unity_procon.to_yaml}")
 		end
 		redirect_to @unity_procon
 	end
