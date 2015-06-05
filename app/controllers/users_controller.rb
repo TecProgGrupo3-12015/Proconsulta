@@ -83,15 +83,15 @@ class UsersController < ApplicationController
 		# If the logged current user different of instance @user, then redirect
 		# home and show alert message.
 		# Else destroy the instance user, redirect to home and show succes message.
-		if current_user != @user
-			redirect_to root_path
-			flash[:error] = "Essa conta nao é sua!"
-			CUSTOM_LOGGER.error("Failure to destroy user #{@user.to_yaml}")
-		else
+		if current_user == @user
 			@user.destroy
 			redirect_to root_path
 			flash[:sucess] = "Usuário excluido com exito."
 			CUSTOM_LOGGER.info("User destroy successfully #{@user.to_yaml}")
+		else
+			redirect_to root_path
+			flash[:error] = "Essa conta nao é sua!"
+			CUSTOM_LOGGER.error("Failure to destroy user #{@user.to_yaml}")
 		end
 	end
 
