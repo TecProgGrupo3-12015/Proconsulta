@@ -63,10 +63,11 @@ class UsersController < ApplicationController
 	# Update one edited user.
 	def update
 		@user = User.find(params[:id])
+		@update_attributes = @user.update_attributes(user_params)
 		# Verify if the user has his attributes update, if true: show alert,
 		# signin and redirect to @user.
 		# Else, go to edit view.
-		if @user.update_attributes(user_params)
+		if @update_attributes
 			flash[:sucess] = "Usuário editado com exito!"
 			sign_in(@user)
 			redirect_to @user
@@ -80,11 +81,12 @@ class UsersController < ApplicationController
 	# delete an user.
 	def destroy
 		@user = User.find(params[:id])
+		@destroy = @user.destroy
 		# If the logged current user different of instance @user, then redirect
 		# home and show alert message.
 		# Else destroy the instance user, redirect to home and show succes message.
 		if current_user == @user
-			@user.destroy
+			@destroy
 			redirect_to root_path
 			flash[:sucess] = "Usuário excluido com exito."
 			CUSTOM_LOGGER.info("User destroy successfully #{@user.to_yaml}")
