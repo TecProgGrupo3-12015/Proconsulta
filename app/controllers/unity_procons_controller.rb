@@ -32,25 +32,26 @@ class UnityProconsController < ApplicationController
 		hash = Hash.new
 		all_rating = Rating.where("unity_procon_id = ?", params[:id])
 		all_rating.each do |rating|
-		case rating.value_rating
+		rating_value = rating.value_rating
+		case rating_value
 			when 1
-				ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
+				ratings = Rating.all.select { |m| m.value_rating == rating_value }
 				hash["Péssimo"] = ratings.count
 				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
 			when 2
-				ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }	
+				ratings = Rating.all.select { |m| m.value_rating == rating_value }	
 				hash["Ruim"] = ratings.count
 				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
 			when 3
-				ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
+				ratings = Rating.all.select { |m| m.value_rating == rating_value }
 				hash["Regular"] = ratings.count
 				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
 			when 4
-				ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
+				ratings = Rating.all.select { |m| m.value_rating == rating_value }
 				hash["Bom"] = ratings.count
 				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
 			when 5
-				ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
+				ratings = Rating.all.select { |m| m.value_rating == rating_value }
 				hash["Ótimo"] = ratings.count
 				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
 			else
