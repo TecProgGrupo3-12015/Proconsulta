@@ -62,25 +62,7 @@ class CustomerServicesController < ApplicationController
 			else
 				# Nothing to do.
 			end
-			hash[uf.description_uf] = case type_service
-																when QUANTITY_ALL then uf.quantity_uf
-																when QUANTITY_DIRECT_COMPLAINT
-				 													then uf.quantity_direct_complaint
-																when QUANTITY_PRELIMINARY_SERVICE
-																	then uf.quantity_preliminary_service
-																when QUANTITY_CALCULATION
-																	then uf.quantity_calculation
-																when QUANTITY_CIP then uf.quantity_direct_cip
-																when QUANTITY_FORWARD_SUPERVISION
-																	then uf.quantity_forward_supervision
-																when QUANTITY_INITIAL_JEC
-																	then uf.quantity_initial_jec
-																when QUANTITY_LETTER_COMPLAINT
-																	then uf.quantity_letter_complaint
-																when QUANTITY_SIMPLE_CONSULT
-																	then uf.quantity_simple_consult
-																end
-		end
+		compare_customer_service_by_type(hash, uf, type_service)
 		render :json => hash.to_json
 	end
 
@@ -96,27 +78,6 @@ class CustomerServicesController < ApplicationController
 			hash[region.description_region] = region.quantity_region.to_i
 		end
 		hash
-	end
-
-	def compare_customer_service_by_type(hash, region, type_service)
-		hash[region.description_region] = case type_service
-																			when QUANTITY_DIRECT_COMPLAINT
-																				then region.quantity_direct_complaint
-																			when QUANTITY_PRELIMINARY_SERVICE
-																				then region.quantity_preliminary_service
-																			when QUANTITY_CALCULATION
-																				then region.quantity_calculation
-																			when QUANTITY_CIP
-																				then region.quantity_direct_cip
-																			when QUANTITY_FORWARD_SUPERVISION
-																				then region.quantity_forward_supervision
-																			when QUANTITY_INITIAL_JEC
-																				then region.quantity_initial_jec
-																			when QUANTITY_LETTER_COMPLAINT
-																				then region.quantity_letter_complaint
-																			when QUANTITY_SIMPLE_CONSULT
-																				then region.quantity_simple_consult
-																			end
 	end
 
 	def filter_customer_service_by_type_region
@@ -147,8 +108,9 @@ class CustomerServicesController < ApplicationController
 			false
 		end
 	end
-	
-	# This method verify if the uf object passed by argument do not have 
+
+	private
+		# This method verify if the uf object passed by argument do not have 
 	# description. Return true if do not have, else, false.
 	def is_uf_description_nil? (uf)
 		not_exist_uf_description = uf.description_uf == nil
@@ -159,4 +121,25 @@ class CustomerServicesController < ApplicationController
 			# Nothing to do
 		end
 	end
+
+		def compare_customer_service_by_type(hash, region, type_service)
+			hash[region.description_region] = case type_service
+																				when QUANTITY_DIRECT_COMPLAINT
+																					then region.quantity_direct_complaint
+																				when QUANTITY_PRELIMINARY_SERVICE
+																					then region.quantity_preliminary_service
+																				when QUANTITY_CALCULATION
+																					then region.quantity_calculation
+																				when QUANTITY_CIP
+																					then region.quantity_direct_cip
+																				when QUANTITY_FORWARD_SUPERVISION
+																					then region.quantity_forward_supervision
+																				when QUANTITY_INITIAL_JEC
+																					then region.quantity_initial_jec
+																				when QUANTITY_LETTER_COMPLAINT
+																					then region.quantity_letter_complaint
+																				when QUANTITY_SIMPLE_CONSULT
+																					then region.quantity_simple_consult
+																				end
+		end
 end
