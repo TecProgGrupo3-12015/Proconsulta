@@ -34,27 +34,17 @@ class UnityProconsController < ApplicationController
 		all_rating.each do |rating|
 		case rating.value_rating
 			when 1
-				ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
-				hash["Péssimo"] = ratings.count
-				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
+				test2_hash_return(1)
 			when 2
-				ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }	
-				hash["Ruim"] = ratings.count
-				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
+				test2_hash_return(2)
 			when 3
-				ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
-				hash["Regular"] = ratings.count
-				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
+				test2_hash_return(3)
 			when 4
-				ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
-				hash["Bom"] = ratings.count
-				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
+				test2_hash_return(4)
 			when 5
-				ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
-				hash["Ótimo"] = ratings.count
-				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
+				test2_hash_return(5)
 			else
-				CUSTOM.LOGGER.info("Failure to rate a unity procon")
+				test2_hash_return(6)
 			end	
 		end
 		hash
@@ -125,4 +115,44 @@ class UnityProconsController < ApplicationController
 			CUSTOM.LOGGER.info("Searched a unity procon ordered #{data.to_yaml}")
 		end
 	end
+
+	def test2_hash_return(num)
+		ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
+		CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
+		if num == 1
+			hash["Péssimo"] = ratings.count
+		elsif num == 2
+			hash["Ruim"] = ratings.count
+		elsif num == 3
+			hash["Regular"] = ratings.count
+		elsif num == 4
+			hash["Bom"] = ratings.count
+		elsif num == 5
+			hash["Ótimo"] = ratings.count
+		else	
+			CUSTOM.LOGGER.info("Failure to rate a unity procon")	
+		end	 	 
+	end
+		
+	end
 end
+
+			ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
+				hash["Péssimo"] = ratings.count
+				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
+
+			ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
+				hash["Ruim"] = ratings.count
+				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
+			
+			ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
+				hash["Regular"] = ratings.count
+				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
+			
+			ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
+				hash["Bom"] = ratings.count
+				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
+		
+			ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
+				hash["Ótimo"] = ratings.count
+				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
