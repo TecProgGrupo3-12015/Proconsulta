@@ -88,16 +88,10 @@ class UnityProconsController < ApplicationController
 			redirect_to root_path
 			return
 		end
-		sql = "1=1"
-		sql = sql
+
 		# Sort in descending order unity procons' rating if a search parameter is # entered or not
-		if params[:search] == ""
-			data = UnityProcon.where("average_pontuation is not null").order('average_pontuation DESC').paginate(:page=>1)
-			CUSTOM.LOGGER.info("Searched a unity procon without params ordered #{data.to_yaml}")
-		else
-			data = UnityProcon.where("uf_procon = ? and average_pontuation is not null", params[:search]).order('average_pontuation DESC').paginate(:page=>1)
-			CUSTOM.LOGGER.info("Searched a unity procon ordered #{data.to_yaml}")
-		end
+		test1(params[:search])
+
 		render :json=>data.to_json
 	end
 
@@ -119,5 +113,16 @@ class UnityProconsController < ApplicationController
 			CUSTOM.LOGGER.error("Failure to update unity procon #{@unity_procon.to_yaml}")
 		end
 		redirect_to @unity_procon
+	end
+
+	private
+	def test1 (params)
+		if params[:search] == ""
+			data = UnityProcon.where("average_pontuation is not null").order('average_pontuation DESC').paginate(:page=>1)
+			CUSTOM.LOGGER.info("Searched a unity procon without params ordered #{data.to_yaml}")
+		else
+			data = UnityProcon.where("uf_procon = ? and average_pontuation is not null", params[:search]).order('average_pontuation DESC').paginate(:page=>1)
+			CUSTOM.LOGGER.info("Searched a unity procon ordered #{data.to_yaml}")
+		end
 	end
 end
