@@ -136,23 +136,3 @@ class UnityProconsController < ApplicationController
 		
 	end
 end
-
-			ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
-				hash["Péssimo"] = ratings.count
-				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
-
-			ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
-				hash["Ruim"] = ratings.count
-				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
-			
-			ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
-				hash["Regular"] = ratings.count
-				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
-			
-			ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
-				hash["Bom"] = ratings.count
-				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
-		
-			ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
-				hash["Ótimo"] = ratings.count
-				CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
