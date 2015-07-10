@@ -10,9 +10,13 @@ class SessionsController < ApplicationController
 
 	#  Log in
 	def create
+
 		#Recivies User object by email adress and ignore uppercase letters
 		user = User.find_by_email_user(params[:session][:email_user].downcase)
-		if user && user.authenticate(params[:session][:password])
+
+		user_is_authenticate = user && user.authenticate(params[:session][:password])
+		
+		if user_is_authenticate 
 			sign_in user
 			redirect_to user
 			flash[:sucess] = "Logado com exito!"
