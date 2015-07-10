@@ -34,17 +34,17 @@ class UnityProconsController < ApplicationController
 		all_rating.each do |rating|
 		case rating.value_rating
 			when 1
-				test2_hash_return(1)
+				return_rating_to_procon_unity_from_average(1)
 			when 2
-				test2_hash_return(2)
+				return_rating_to_procon_unity_from_average(2)
 			when 3
-				test2_hash_return(3)
+				return_rating_to_procon_unity_from_average(3)
 			when 4
-				test2_hash_return(4)
+				return_rating_to_procon_unity_from_average(4)
 			when 5
-				test2_hash_return(5)
+				return_rating_to_procon_unity_from_average(5)
 			else
-				test2_hash_return(6)
+				return_rating_to_procon_unity_from_average(6)
 			end	
 		end
 		hash
@@ -80,7 +80,7 @@ class UnityProconsController < ApplicationController
 		end
 
 		# Sort in descending order unity procons' rating if a search parameter is # entered or not
-		test1(params[:search])
+		get_order_from_uf(params[:search])
 
 		render :json=>data.to_json
 	end
@@ -106,7 +106,7 @@ class UnityProconsController < ApplicationController
 	end
 
 	private
-	def test1 (params)
+	def get_order_from_uf (params)
 		if params[:search] == ""
 			data = UnityProcon.where("average_pontuation is not null").order('average_pontuation DESC').paginate(:page=>1)
 			CUSTOM.LOGGER.info("Searched a unity procon without params ordered #{data.to_yaml}")
@@ -116,7 +116,7 @@ class UnityProconsController < ApplicationController
 		end
 	end
 
-	def test2_hash_return(num)
+	def return_rating_to_procon_unity_from_average(num)
 		ratings = Rating.all.select { |m| m.value_rating == rating.value_rating }
 		CUSTOM.LOGGER.info("Rated unity procon #{@unity_procon.to_yaml}")
 		if num == 1
